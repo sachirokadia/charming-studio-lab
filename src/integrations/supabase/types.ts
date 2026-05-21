@@ -14,7 +14,187 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      badges: {
+        Row: {
+          description: string
+          icon: string
+          id: string
+          name: string
+          xp_required: number
+        }
+        Insert: {
+          description?: string
+          icon: string
+          id?: string
+          name: string
+          xp_required: number
+        }
+        Update: {
+          description?: string
+          icon?: string
+          id?: string
+          name?: string
+          xp_required?: number
+        }
+        Relationships: []
+      }
+      expenses: {
+        Row: {
+          amount: number
+          category: string
+          created_at: string
+          date: string
+          id: string
+          note: string | null
+          user_id: string
+          xp_awarded: number
+        }
+        Insert: {
+          amount: number
+          category: string
+          created_at?: string
+          date?: string
+          id?: string
+          note?: string | null
+          user_id: string
+          xp_awarded?: number
+        }
+        Update: {
+          amount?: number
+          category?: string
+          created_at?: string
+          date?: string
+          id?: string
+          note?: string | null
+          user_id?: string
+          xp_awarded?: number
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          daily_budget: number
+          id: string
+          last_expense_date: string | null
+          level: number
+          name: string
+          streak: number
+          xp: number
+        }
+        Insert: {
+          created_at?: string
+          daily_budget?: number
+          id: string
+          last_expense_date?: string | null
+          level?: number
+          name?: string
+          streak?: number
+          xp?: number
+        }
+        Update: {
+          created_at?: string
+          daily_budget?: number
+          id?: string
+          last_expense_date?: string | null
+          level?: number
+          name?: string
+          streak?: number
+          xp?: number
+        }
+        Relationships: []
+      }
+      quests: {
+        Row: {
+          description: string
+          icon: string
+          id: string
+          name: string
+          target_value: number
+          type: string
+          xp_reward: number
+        }
+        Insert: {
+          description: string
+          icon?: string
+          id?: string
+          name: string
+          target_value: number
+          type: string
+          xp_reward: number
+        }
+        Update: {
+          description?: string
+          icon?: string
+          id?: string
+          name?: string
+          target_value?: number
+          type?: string
+          xp_reward?: number
+        }
+        Relationships: []
+      }
+      user_badges: {
+        Row: {
+          badge_id: string
+          earned_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          badge_id: string
+          earned_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          badge_id?: string
+          earned_at?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_badges_badge_id_fkey"
+            columns: ["badge_id"]
+            isOneToOne: false
+            referencedRelation: "badges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_quests: {
+        Row: {
+          completed: boolean
+          id: string
+          progress: number
+          quest_id: string
+          user_id: string
+        }
+        Insert: {
+          completed?: boolean
+          id?: string
+          progress?: number
+          quest_id: string
+          user_id: string
+        }
+        Update: {
+          completed?: boolean
+          id?: string
+          progress?: number
+          quest_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_quests_quest_id_fkey"
+            columns: ["quest_id"]
+            isOneToOne: false
+            referencedRelation: "quests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
