@@ -2,13 +2,14 @@ import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
-const navItems = [
+type NavItem = { to: "/dashboard" | "/quests" | "/add" | "/story" | "/stats"; icon: string; label: string; primary?: boolean };
+const navItems: NavItem[] = [
   { to: "/dashboard", icon: "grid_view", label: "Hub" },
   { to: "/quests", icon: "military_tech", label: "Quests" },
   { to: "/add", icon: "add", label: "Add", primary: true },
   { to: "/story", icon: "auto_stories", label: "Story" },
   { to: "/stats", icon: "leaderboard", label: "Stats" },
-] as const;
+];
 
 function MIcon({ name, className = "" }: { name: string; className?: string }) {
   return <span className={`material-symbols-outlined ${className}`} style={{ fontVariationSettings: "'wght' 500" }}>{name}</span>;
